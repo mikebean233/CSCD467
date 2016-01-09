@@ -1,5 +1,3 @@
-package MichaelPeterson.CSCD467.Labs.Lab1;
-
 public class SecondaryThreadRunner implements Runnable
 {
 	private MainWindow _thisWindow;
