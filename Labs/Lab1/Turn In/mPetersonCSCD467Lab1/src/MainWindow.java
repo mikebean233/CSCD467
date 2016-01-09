@@ -1,14 +1,15 @@
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
-
+import javax.swing.text.DefaultCaret;
 
 public class MainWindow extends JFrame implements KeyListener{
 	private static final long serialVersionUID = 1L;
@@ -22,22 +23,21 @@ public class MainWindow extends JFrame implements KeyListener{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow frame = new MainWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		MainWindow mainWindow = new MainWindow("Michael Peterson - Lab1");
+        mainWindow.addWindowListener(
+        	new WindowAdapter() {
+            	public void windowClosing( WindowEvent e){
+                	System.exit(0);
+            	}
+        	}
+        );
 	}
 	
 	/**
 	 * Create the frame.
 	 */
-	public MainWindow() {
+	public MainWindow(String name) {
+		super(name);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -54,6 +54,10 @@ public class MainWindow extends JFrame implements KeyListener{
 	
 		textArea.addKeyListener(this);
 		
+		((DefaultCaret)textArea.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
+		setVisible(true);
+		
 		// create and kick off the two new threads
 		thread1 = new Thread(new SecondaryThreadRunner(this), "Thread-1");
 		thread2 = new Thread(new SecondaryThreadRunner(this), "Thread-2");
@@ -63,8 +67,7 @@ public class MainWindow extends JFrame implements KeyListener{
 		noKeysPressed = 0;
 	}
 	
-	public void appendToTextArea(String newLine)
-	{
+	public void appendToTextArea(String newLine){
 		if(newLine != null)
 			textArea.append(newLine + System.lineSeparator());
 	}
