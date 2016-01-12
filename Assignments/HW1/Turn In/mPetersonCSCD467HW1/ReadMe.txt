@@ -6,7 +6,7 @@ Step 1) Extract mPetersonCSCD467Lab1.zip into a convenient directory
 		mPetersonCSCD467Lab1/
 			|- src/
 			|   |- MainWindow.java
-			|	|- SecondaryThreadRunner.java
+			|	|- TextRepeater.java
 			|
 			|- bin/
 			|
