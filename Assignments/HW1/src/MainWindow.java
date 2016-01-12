@@ -77,7 +77,7 @@ public class MainWindow extends JFrame implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		Character thisCharacter = new Character(e.getKeyChar());
 
-		if(thisCharacter.toString().equals(System.lineSeparator())) {
+		if(thisCharacter.charValue() == '\n' || thisCharacter.charValue() == '\r') {
 			endRepeaterThreadUsingJoin();
 			if(nextDisplayedString.toLowerCase().equals("exit"))
 				System.exit(0);
