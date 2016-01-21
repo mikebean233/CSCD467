@@ -24,7 +24,6 @@ public class WaiterRunner implements Runnable {
             catch(InterruptedException ex)
             {
                 System.out.println("Printer got his work half done!");
-                _printer.interrupt();
                 break;
             }
         }
