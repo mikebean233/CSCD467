@@ -23,6 +23,4 @@ public class ThreadRunner implements Runnable{
                         messageNo + "th";
         return prefix + " Message from thread " + _threadId;
     }
-
-
 }

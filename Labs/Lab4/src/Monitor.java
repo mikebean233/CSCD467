@@ -9,12 +9,10 @@ public class Monitor {
         _runningThreadId = 0;
     }
 
-    public void waitForTurn(int threadId){
+    public synchronized void waitForTurn(int threadId){
         while(_runningThreadId != threadId) {
             try {
-                synchronized (this){
-                    this.wait();
-                }
+                this.wait();
             }catch(Exception e){}
         }
     }
@@ -22,6 +20,6 @@ public class Monitor {
     public synchronized void moveToNextThread(){
         ++_runningThreadId;
         _runningThreadId %= (_noThreads);
-        this.notify();
+        this.notifyAll();
     }
 }
