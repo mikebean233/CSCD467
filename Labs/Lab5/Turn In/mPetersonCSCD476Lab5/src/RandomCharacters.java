@@ -1,6 +1,4 @@
 
-import javafx.scene.layout.HBox;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -22,7 +20,11 @@ public class RandomCharacters extends JApplet implements Runnable,
    
 	private Thread threads[];
 	private boolean suspended[];
-	
+
+	public Container getContainer(){
+		return c;
+	}                                                        
+
 	//add JButton
 	public void init() {
 		outputs = new JLabel[ SIZE ];
@@ -145,7 +147,7 @@ public class RandomCharacters extends JApplet implements Runnable,
 	//add main method here
 	public static void main(String[] args){
 		// kick off an RandomCharacters instance
-		RandomCharacters rc = new RandomCharacters();
+		final RandomCharacters rc = new RandomCharacters();
 		rc.init();
 		rc.start();
 
@@ -159,11 +161,9 @@ public class RandomCharacters extends JApplet implements Runnable,
 			}
 		});
 		jframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		jframe.setContentPane(rc.c);
+		jframe.setContentPane(rc.getContainer());
 		jframe.pack();
 		jframe.setVisible(true);
 	}
-
-
 }
 
